@@ -17,5 +17,5 @@ Route::get('/', function () {
 
 
 
-Route::post('/api/register', 'RegisterController@store');
-Route::get('/api/verification/{id}', 'LoginController@verification');
+
+
