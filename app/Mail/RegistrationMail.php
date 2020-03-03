@@ -6,20 +6,27 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Entities\User;
 
-class SendMailable extends Mailable
+class RegistrationMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $firstName;
+
+    public $lastName;
+
+    public $link;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct($firstName, $lastName, $link)
     {
-        $this->user = $user;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->link = $link;
     }
 
     /**
@@ -29,7 +36,7 @@ class SendMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('name');
+        return $this->view('registration');
     }
 }
 

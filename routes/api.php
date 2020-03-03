@@ -13,12 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::prefix('auth')->group(function() {
+    Route::post('login', 'AuthController@login');
+    Route::post('register', 'AuthController@createUser');
+    Route::post('activate', 'AuthController@activateUser');
 });
-
-
-Route::get('/homepage', 'HomepageController@show');
-Route::post('/register', 'RegisterController@store');
-Route::post('/login', 'LoginController@store');
-Route::get('/verification/{id}', 'LoginController@verification');

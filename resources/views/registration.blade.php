@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    DA LI OVO RADI
+    <div>
+        <h1>Dobrodosao {{$firstName}} {{$lastName}}</h1>
+        <h2>Da bi se aktivirali pritisnite na link ispod</h2>
+        <a href="{{ url($link) }}">Click Here!</a>
+    </div>
 </body>
 </html>
