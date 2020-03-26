@@ -21,4 +21,8 @@ Route::prefix('auth')->group(function() {
     Route::post('login', 'AuthController@login');
     Route::post('register', 'AuthController@createUser');
     Route::post('activate', 'AuthController@activateUser');
+    Route::post('reset', 'AuthController@resetPassword');
+    Route::post('new-password', 'AuthController@newPassword');
 });
+
+Route::post('/loans', 'LoansController@createLoan');

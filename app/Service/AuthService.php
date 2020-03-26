@@ -43,7 +43,8 @@ class AuthService {
             'last_name' => $request->lastName,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'token' => Str::random(20)
+            'token' => Str::random(20),
+            'resetPasswordToken' => ""
         ]);
         
         try {
@@ -69,6 +70,23 @@ class AuthService {
         } catch(QueryException $exception) {
             throw new Exception('Nalog je vec aktiviran');
         }
+    }
+
+    public function resetPassword($email) {
+        $user = User::where('email', $email)->first();
+        $user->resetPasswordToken = Str::random(20);
+
+        $user->save();
+
+        $this->emailService->sendResetPasswordEmail($user->email, $user->resetPasswordToken);
+
+    }
+
+    public function newPassword($resetPasswordToken, $password) {
+        $user = User::where('resetPasswordToken', $resetPasswordToken)->first();
+        $user->resetPasswordToken = '';
+        $user->password = bcrypt($password);
+        $user->save();
     }
 }
 

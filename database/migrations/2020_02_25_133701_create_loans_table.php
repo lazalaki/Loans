@@ -17,9 +17,12 @@ class CreateLoansTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('loanTo');
+            $table->string('firstName');
+            $table->string('lastName');
+            $table->date('dateOfLoan');
+            $table->date('returnDate');
             $table->string('title');
-            $table->text('description');
+            $table->text('notes');
             $table->timestamps();
         });
     }
